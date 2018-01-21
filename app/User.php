@@ -26,4 +26,32 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function user_rol()
+    {
+        return $this->hasMany(UserRol::class);
+    }
+
+    //devolver carritos asociados al usuario
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    //cart_id
+    public function getCartAttribute()
+    {
+        $cart = $this->carts()->where('status', 'Active')->first();
+        if($cart)
+            return $cart->id;
+
+        //else
+        $car = new Cart();
+        $cart->status = 'Active';
+        $cart->user_id = $this->id;
+        $cart->save();
+
+        return $cart;
+    }
+
 }
