@@ -15,14 +15,13 @@ class CreateProductFeauturesTable extends Migration
     {
         Schema::create('product_feautures', function (Blueprint $table) {
             $table->increments('id');
-
+            $table->float('price');
             $table->integer('stock');
             $table->string('color')->nullable();
             $table->string('size');
-
-             //FK
-            $table->integer('product_id')->unsigned()->nullable();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->unique(['color', 'size']);
+            
+             
 
             $table->timestamps();
         });

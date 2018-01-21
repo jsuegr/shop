@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use App\ProductImage;
+use App\ProductFeature;
 class Product extends Model
 {
 
@@ -29,6 +30,12 @@ class Product extends Model
     public function category()
     {
     	return $this->belongsTo(Category::class);
+    }
+
+    //$product->product_feautes
+    public function product_features()
+    {
+        return $this->hasMany(ProductFeature::class);
     }
 
     //$product->images
