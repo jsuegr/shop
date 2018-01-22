@@ -22,9 +22,8 @@ class NewOrder extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user, Cart $cart)
     {
-        //
         $this->user = $user;
         $this->cart = $cart;
     }
@@ -36,6 +35,7 @@ class NewOrder extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.new-order')->subject('Un cliente ha realizado un nuevo pedido!');
+        return $this->view('emails.new-order')
+            ->subject('Un cliente ha realizado un nuevo pedido!');
     }
 }

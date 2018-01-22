@@ -13,30 +13,15 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        
-        Schema::create('user_rols', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('description')->nullable();            
-            $table->timestamps();
-        });
-
-
-
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-
-            //FK
-            $table->integer('userrol_id')->unsigned()->index()->nullable();
-            $table->foreign('userrol_id')->references('id')->on('user_rols')->onDelete('set null');
+            $table->boolean('admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
-
-        
     }
 
     /**
@@ -47,7 +32,5 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-
-        Schema::dropIfExists('user_rols');
     }
 }
