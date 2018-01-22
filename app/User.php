@@ -52,4 +52,9 @@ class User extends Authenticatable
 
         return $cart;
     }
+
+    public function getHasRoleAttribute()
+    {
+        return UserRole::where('user_id', $this->id)->where('role_id', $roleId)->exists();
+    }
 }

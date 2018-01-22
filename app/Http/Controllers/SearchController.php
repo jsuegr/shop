@@ -14,10 +14,12 @@ class SearchController extends Controller
     	
     	if ($products->count() == 1) {
     		$id = $products->first()->id;
-    		return redirect("products/$id"); // 'products/'.$id
+    		//return redirect("products/$id"); // 'products/'.$id
+            return $products;
     	}
 
-    	return view('search.show')->with(compact('products', 'query'));
+    	//return view('search.show')->with(compact('products', 'query'));
+        return $products;
     }
 
     public function data()
