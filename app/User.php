@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function user_rol()
+    {
+        return $this->hasMany(UserRol::class);
+    }
+
     public function carts()
     {
         return $this->hasMany(Cart::class);
