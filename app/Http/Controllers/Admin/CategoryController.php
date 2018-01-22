@@ -29,8 +29,20 @@ class CategoryController extends Controller
     	$this->validate($request,Category::$rules,Category::$messages);
 
     	//registrar nuevo producto en la bd
-    	Category::create($request->all());  //asignacion masiva
+    	Category::create($request->only('name', 'description'));  //asignacion masiva
+        if($request->hasFile('image'))
+        {
+            //GUARDAR IMAGEN
+            /*
+            $file = $request->file('image');
+            $path = public_path() . '/images/categories';    
+            $productImage = new ProductImage();
+            $productImage->image = $imageUrl;
+            $productImage->product_id=$id;  
+            $producImage->save();
+            */
 
+        }
     	//return redirect('/admin/categories');
     }
 
@@ -47,7 +59,20 @@ class CategoryController extends Controller
     	$this->validate($request,Category::$rules,Category::$messages);
 
     	//actualizar producto en la base de datos
-    	$category->update($request->all());
+    	$category->update($request->only('name','description'));
+         if($request->hasFile('image'))
+        {
+            //GUARDAR IMAGEN
+            /*
+            $file = $request->file('image');
+            $path = public_path() . '/images/categories';    
+            $productImage = new ProductImage();
+            $productImage->image = $imageUrl;
+            $productImage->product_id=$id;  
+            $producImage->save();
+            */
+
+        }
 
     	//return redirect('/admin/categories');
     }

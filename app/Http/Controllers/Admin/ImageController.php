@@ -26,9 +26,7 @@ class ImageController extends Controller
     	$productImage = new ProductImage();
     	$productImage->image = $imageUrl;
     	$productImage->product_id=$id;  
-    	$producImage->save();
-        
-        
+    	$producImage->save();        
     }
 
     public function destroy(Request $request,$id)

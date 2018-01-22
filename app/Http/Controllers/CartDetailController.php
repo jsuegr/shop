@@ -8,6 +8,11 @@ class CartDetailController extends Controller
 {
     //
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Request $request)
     {
     	$cartDetail = new CartDetail();

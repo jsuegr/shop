@@ -31,8 +31,12 @@ class Category extends Model
     //muestra la imagen de la categoria. en este caso selecciona una imagen destacada del algun producto
     public function getFeaturedImageUrlAttribute()
     {
-    	$featuredProduct = $this->products()->first();
+        if($this->image)
+            return '/images/categories/'.$this->image;
+        //else
+    	$firstroduct = $this->products()->first();
+    	   return $firstProduct->featured_image_url;
 
-    	return $featuredProduct->featured_image_url;
+        return '/images/default.gif'
     }
 }
