@@ -19,7 +19,7 @@ class UserRolTableSeeder extends Seeder
 
 
         UserRol::create([
-            'name' => 'seller',
+            'name' => 'provider',
             'description' => 'Rol dedicado para proveedores del sistema. Tiene acceso al módulo de ventas y de compras'
         ]);
         

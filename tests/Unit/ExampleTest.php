@@ -20,8 +20,7 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'id' => 1,
-                'name' => 'Et'
+                'id' => 1
             ]);
     }
 
@@ -30,7 +29,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testSearchASpecificProduct()
+   /* public function testSearchASpecificProduct()
     {
         //checar pagina de inicio
        $response = $this->withHeaders([
@@ -42,7 +41,7 @@ class ExampleTest extends TestCase
                 'name' => 'Temporibus aspernatur esse'
                 ]);
             
-    }
+    }*/
 
     public function testHome()
     {
@@ -63,4 +62,15 @@ class ExampleTest extends TestCase
             'id' => 2
             ]);
     }
+
+    public function testAdminProducts()
+    {
+        //checar pagina de inicio
+       $user = User::find(3);
+       $response = $this->actingAs($user)->get('/admin/products');
+       $response->assertStatus(200)
+            ->assertSee("hola");
+            
+    }
+
 }

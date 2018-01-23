@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AdminMiddleware
+class AdminProviderMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,10 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!auth()->user()->hasRole(3))
+        if (auth()->user()->hasRole(1)) {
             return redirect('/');
-        
+        }
+       
         return $next($request);
     }
 }

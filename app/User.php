@@ -53,8 +53,10 @@ class User extends Authenticatable
         return $cart;
     }
 
-    public function getHasRoleAttribute()
+    public function hasRole($rol_id)
     {
-        return UserRole::where('user_id', $this->id)->where('role_id', $roleId)->exists();
+        if(auth()->user()->userrol_id==$rol_id)
+            return true;
+        return false;
     }
 }

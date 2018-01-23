@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('username'); // login
+            $table->integer('status')->default(1); // habilitado-deshabilitado
 
             //FK
             $table->integer('userrol_id')->unsigned()->index()->nullable();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Illuminate\Http\Request as Req;
 
-class RegisterController extends Controller
+class RegisterProviderController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -31,6 +31,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    private static $userrol_id = 2;
 
     /**
      * Create a new controller instance.
@@ -56,8 +57,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'phone' => 'required',
             'address' => 'required',
-            'username' => 'required|unique:users',
-            'userrol_id' => 'required'
+            'username' => 'required|unique:users'
         ]);
     }
 
@@ -76,14 +76,13 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'address' => $data['address'],
             'username' => $data['username'],
-            'userrol_id' => $data['userrol_id']
+            'userrol_id' => $userrol_id
         ]);
     }
 
-    public function showRegistrationForm(Req $request)
-    {
-        $name = $request->input('name');
-        $email = $request->input('email');
-        return view('auth.register')->with(compact('name', 'email'));
+    public function showRegistrationProviderForm(Req $request)
+    {       
+        $path = 'admin/register/provider';
+        return view('auth.register')->with(compact('path'));
     }
 }
