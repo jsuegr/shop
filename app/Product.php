@@ -32,7 +32,7 @@ class Product extends Model
     //$product->product_feautes
     public function product_features()
     {
-        return $this->hasMany(ProductFeature::class);
+        return $this->hasMany(ProductFeauture::class);
     }
     
     // $product->images
