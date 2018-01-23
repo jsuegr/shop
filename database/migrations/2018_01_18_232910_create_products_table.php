@@ -13,6 +13,12 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('product_feautures');
+        Schema::dropIfExists('products');
+         
+
+         
+
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
 
@@ -21,13 +27,27 @@ class CreateProductsTable extends Migration
             $table->text('long_description')->nullable();
             
 
-            //FK
-            $table->integer('product_feature_id')->unsigned()->nullable();
-            $table->foreign('product_feature_id')->references('id')->on('product_feautures');
+            
             
              //FK
             $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
+
+            $table->timestamps();
+        });
+
+        //product 
+         Schema::create('product_feautures', function (Blueprint $table) {
+            $table->increments('id');
+            $table->float('price');
+            $table->integer('stock');
+            $table->string('color')->nullable();
+            $table->string('size');
+            $table->unique(['color', 'size']);
+            //FK
+            $table->integer('product_id')->unsigned()->nullable();
+            $table->foreign('product_id')->references('id')->on('products');
+             
 
             $table->timestamps();
         });
@@ -40,6 +60,7 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('product_feautures');
         Schema::dropIfExists('products');
     }
 }

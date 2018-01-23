@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function user_rol()
     {
-        return $this->hasMany(UserRol::class);
+        return $this->belongsTo(UserRol::class);
     }
 
     public function carts()

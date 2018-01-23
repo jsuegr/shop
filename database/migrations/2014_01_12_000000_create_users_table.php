@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        
         //tabla de roles de usuario
         Schema::create('user_rols', function (Blueprint $table) {
             $table->increments('id');
@@ -28,6 +29,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('username'); // login
 
             //FK
             $table->integer('userrol_id')->unsigned()->index()->nullable();
