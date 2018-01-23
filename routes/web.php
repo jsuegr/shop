@@ -43,12 +43,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')
 	Route::post('/categories/{category}/edit', 'CategoryController@update'); // actualizar
 	Route::delete('/categories/{category}', 'CategoryController@destroy'); // form eliminar	
 
+	//registro de proveedores
 	$this->get('register/provider', 'Auth\RegisterProviderController@showRegistrationProviderForm');
     $this->post('register/provider', 'Auth\RegisterProviderController@registerProvider');
 
+    //registro de administradores
     $this->get('register/admin', 'Auth\RegisterAdminController@showRegistrationProviderForm');
     $this->post('register/admin', 'Auth\RegisterAdminController@registerProvider');
-
 
     //Administrar usuarios
     Route::get('/users', 'UsersController@index'); // listado
@@ -58,10 +59,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')
 	Route::post('/users/{id}/edit', 'UsersController@update'); // actualizar
 	Route::delete('/users/{id}', 'UsersController@destroy'); // form eliminar
 
-	Route::get('/users/{id}/images', 'ImageController@index'); // listado
-	Route::post('/users/{id}/images', 'ImageController@store'); // registrar
-	Route::delete('/users/{id}/images', 'ImageController@destroy'); // form eliminar	
-	Route::get('/users/{id}/images/select/{image}', 'ImageController@select'); // destacar
+	//buscar usuarios
+	Route::get('/users/search', 'SearchUsersController@show');
+	Route::get('/users/json', 'SearchUsersController@data');
+
+	
 });
 // Registration Routes...
     
@@ -78,5 +80,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')
         $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
         $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
         $this->post('password/reset', 'Auth\PasswordController@reset')
+
+
+        Route::get('/users/{id}/images', 'ImageUserController@index'); // listado
+	Route::post('/users/{id}/images', 'ImageUserController@store'); // registrar
+	Route::delete('/users/{id}/images', 'ImageUserController@destroy'); // form eliminar	
+	Route::get('/users/{id}/images/select/{image}', 'ImageUserController@select'); // destacar
 */
 

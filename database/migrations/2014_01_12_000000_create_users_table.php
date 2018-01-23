@@ -18,7 +18,8 @@ class CreateUsersTable extends Migration
         Schema::create('user_rols', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description')->nullable();            
+            $table->string('description')->nullable(); 
+            $table->string('photo')->nullable();           
             $table->timestamps();
         });
 
@@ -27,11 +28,13 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('username'); // login
+            $table->string('photo')->nullable(); 
             $table->integer('status')->default(1); // habilitado-deshabilitado
 
             //FK
