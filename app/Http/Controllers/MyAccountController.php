@@ -16,18 +16,18 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
     
-    public function edit($id)
+    public function edit()
     {
         $roles = UserRol::orderBy('name')->get();
-        $user = User::find($id);
+        $user = User::find(auth()->user()->id);
         return view('admin.users.edit')->with(compact('user', 'roles')); // form de edición
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $this->validate($request);
         // dd($request->all());
-        $user = User::find($id);
+        $user = User::find(auth()->user()->id);
         $user->name = $request->input('name');
         $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
@@ -40,12 +40,12 @@ class ProductController extends Controller
         return redirect('/myaccount/edit');
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $user = User::find($id);
+        $user = User::find(auth()->user()->id);
         $user->status=0;
         $product->save(); // Dar de baja
-        return back();
+        return redirect('/');
     }
 
 }

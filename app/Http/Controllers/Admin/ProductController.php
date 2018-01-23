@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-    	$products = Product::paginate(10);
+    	$products = Product::where('user_id','=',auth()->user->id)->paginate(10);
         return "hola";
     	//return view('admin.products.index')->with(compact('products')); // listado
     }
@@ -51,6 +51,7 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->long_description = $request->input('long_description');
         $product->category_id = $request->category_id == 0 ? null : $request->category_id;
+        $product->user_id = auth()->user()->id;
         $product->save(); // INSERT
 
         return redirect('/admin/products');
@@ -60,6 +61,11 @@ class ProductController extends Controller
     {
         $categories = Category::orderBy('name')->get();
         $product = Product::find($id);
+        if(!$product->user_id==auth()->user()->id){
+            $notificacion="No se ha podido cargar el producto correctamente";
+            return redirect('/products')->with(compact('notificacion'));
+        }
+            
         return view('admin.products.edit')->with(compact('product', 'categories')); // form de edición
     }
 
@@ -82,6 +88,10 @@ class ProductController extends Controller
         $this->validate($request, $rules, $messages);
         // dd($request->all());
         $product = Product::find($id);
+            if(!$product->user_id==auth()->user()->id){
+                $notificacion="No se ha actualizado el producto correctamente";
+                return redirect('/products')->with(compact('notificacion'));
+            }
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
@@ -98,6 +108,10 @@ class ProductController extends Controller
         ProductImage::where('product_id', $id)->delete();
 
         $product = Product::find($id);
+        if(!$product->user_id==auth()->user()->id){
+            $notificacion="No se ha eliminado el producto correctamente";
+            return redirect('/products')->with(compact('notificacion'));
+        }
         $product->delete(); // DELETE
 
         return back();

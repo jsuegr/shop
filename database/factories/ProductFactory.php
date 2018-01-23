@@ -9,7 +9,8 @@ $factory->define(Product::class, function (Faker $faker) {
        	'name' => substr($faker->sentence(3), 0, -1),
         'descripcion' => $faker->sentence(10),
         'long_description' => $faker->text ,        
-        'category_id' => $faker->numberBetween(1,5)
+        'category_id' => $faker->numberBetween(1,5),
+        'user_id' => $faker->numberBetween(2,3)
         
     ];
 });

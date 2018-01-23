@@ -19,9 +19,9 @@ Route::delete('/cart', 'CartDetailController@destroy');
 Route::post('/order', 'CartController@update');
 
 //Actualizar datos de usaurio actual
-Route::get('/myaccount/{id}/edit', 'MyAccountController@edit'); // formulario edición
-Route::post('/myaccount/{id}/edit', 'MyAccountController@update'); // actualizar
-Route::delete('/myaccount/{id}', 'MyAccountController@destroy'); // form eliminar
+Route::get('/myaccount/edit', 'MyAccountController@edit'); // formulario edición
+Route::post('/myaccount/edit', 'MyAccountController@update'); // actualizar
+Route::delete('/myaccount', 'MyAccountController@destroy'); // form eliminar
 
 
 Route::middleware(['auth', 'admin_provider'])->prefix('admin')->namespace('Admin')
