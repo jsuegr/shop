@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="profile">
                     <div class="avatar">
-                        <img src="{{ $product->featured_image_url }}" alt="Circle Image" class="img-circle img-responsive img-raised">
+                        <img src="{{ $product->featured_image_url }}" alt="Circle Image" class="img-circle img-responsive img-raised image-cropper">
                     </div>
 
                     <div class="name">

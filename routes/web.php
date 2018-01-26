@@ -23,6 +23,7 @@ Route::get('/myaccount/edit', 'MyAccountController@edit'); // formulario edició
 Route::post('/myaccount/edit', 'MyAccountController@update'); // actualizar
 Route::delete('/myaccount', 'MyAccountController@destroy'); // form eliminar
 
+Route::post('/user/card','UserCardController@save'); //registrar datos de tarjeta
 
 
 Route::middleware(['auth', 'admin_provider'])->prefix('admin')->namespace('Admin')

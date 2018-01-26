@@ -54,7 +54,7 @@ class MyAccountController extends Controller
 
         $user->save(); // UPDATE
         //dd($rol->name);
-        return view('admin.users.show')->with(compact('user','rol'));
+        return redirect('/myaccount/edit')->with(compact('user','rol'));
     }
 
     public function destroy()
