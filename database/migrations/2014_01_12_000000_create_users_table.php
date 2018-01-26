@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone')->nullable();
@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
 
             //FK
             $table->integer('userrol_id')->unsigned()->index()->nullable();
-            $table->foreign('userrol_id')->references('id')->on('user_rols')->onDelete('set null');
+            $table->foreign('userrol_id')->references('id')->on('user_rols');
             $table->rememberToken();
             $table->timestamps();
         });

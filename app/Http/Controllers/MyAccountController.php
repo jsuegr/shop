@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserRol;
 
-class ProductController extends Controller
+class MyAccountController extends Controller
 {
    public function __construct()
     {
@@ -20,7 +20,9 @@ class ProductController extends Controller
     {
         $roles = UserRol::orderBy('name')->get();
         $user = User::find(auth()->user()->id);
-        return view('admin.users.edit')->with(compact('user', 'roles')); // form de edición
+        $photo = '/images/users/'.$user->photo;
+        dd($user->rol()->id);
+        return view('admin.users.show')->with(compact('user', 'roles', 'photo')); // form de edición
     }
 
     public function update(Request $request)

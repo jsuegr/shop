@@ -21,7 +21,7 @@ class ProductController extends Controller
     			$imagesRight->push($image);
     	}
 
-    	//return view('products.show')->with(compact('product', 'imagesLeft', 'imagesRight'));
-        return $product;
+    	return view('products.show')->with(compact('product', 'imagesLeft', 'imagesRight'));
+        //return $product;
     }
 }

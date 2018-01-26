@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-    	$products = Product::where('user_id','=',auth()->user->id)->paginate(10);
+    	$products = Product::where('user_id','=',auth()->user()->id)->paginate(10);
   
     	return view('admin.products.index')->with(compact('products')); // listado
     }

@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function user_rol()
+    public function rol()
     {
         return $this->belongsTo(UserRol::class);
     }
@@ -53,10 +53,10 @@ class User extends Authenticatable
         return $cart;
     }
 
-    public function hasRole($rol_id)
+    public function hasRole($user)
     {
-        if(auth()->user()->userrol_id==$rol_id)
-            return true;
-        return false;
+        //if(auth()->user()->userrol_id==$rol_id)
+          //  return true;
+        return $user->userrol_id;
     }
 }

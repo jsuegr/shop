@@ -21,7 +21,8 @@ class UsersTableSeeder extends Seeder
             'phone' => '5568625718',
             'address' => 'direccion 1',
             'username' => 'jsuegr',
-            'userrol_id' => '1'
+            'userrol_id' => '3',
+            'photo' => 'user3.jpg'
 
         ]);
 
@@ -32,7 +33,8 @@ class UsersTableSeeder extends Seeder
             'phone' => '5568979121',
             'address' => 'direccion 2',
             'username' => 'angelica.m',
-            'userrol_id' => '2'
+            'userrol_id' => '2',
+            'photo' => 'user2.jpg'
         ]);
 
         User::create([
@@ -42,7 +44,8 @@ class UsersTableSeeder extends Seeder
             'phone' => '5578891345',
             'address' => 'direccion 3',
             'username' => 'raul.d',
-            'userrol_id' => '3'
+            'userrol_id' => '1',
+            'photo' => 'user1.jpg'
         ]);
     }
 }

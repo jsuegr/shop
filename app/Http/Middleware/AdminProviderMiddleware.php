@@ -15,7 +15,7 @@ class AdminProviderMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->hasRole(1)) {
+        if (auth()->user()->userrol_id==1) {
             return redirect('/');
         }
        

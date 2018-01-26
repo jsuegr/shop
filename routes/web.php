@@ -1,13 +1,13 @@
 <?php
 
-Route::get('/', 'TestController@welcome');
+Route::get('/', 'TestController@welcome'); //Devuelve la vista welcome y muestra las categorias
 
 Auth::routes();
 
 
 
-Route::get('/search', 'SearchController@show');
-Route::get('/products/json', 'SearchController@data');
+Route::get('/search', 'SearchController@show'); //Busca productos
+Route::get('/products/json', 'SearchController@data'); //Regresa todos los productos en forma de json para busqueda predictiva con el plugin de jquery typeahead
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/products/{id}', 'ProductController@show');
@@ -22,6 +22,7 @@ Route::post('/order', 'CartController@update');
 Route::get('/myaccount/edit', 'MyAccountController@edit'); // formulario edición
 Route::post('/myaccount/edit', 'MyAccountController@update'); // actualizar
 Route::delete('/myaccount', 'MyAccountController@destroy'); // form eliminar
+
 
 
 Route::middleware(['auth', 'admin_provider'])->prefix('admin')->namespace('Admin')
@@ -66,11 +67,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')
 	Route::delete('/users/{id}', 'UsersController@destroy'); // form eliminar
 
 	//buscar usuarios
-	Route::get('/users/search', 'SearchUsersController@show');
+	Route::get('/users/searchusers', 'SearchUsersController@show');
 	Route::get('/users/json', 'SearchUsersController@data');
 
 	
 });
+
+
+
 // Registration Routes...
     
 

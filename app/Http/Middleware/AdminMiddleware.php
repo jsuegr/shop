@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!auth()->user()->hasRole(3))
+        if(!auth()->user()->userrol_id==3)
             return redirect('/');
         
         return $next($request);
