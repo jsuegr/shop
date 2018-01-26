@@ -15,10 +15,9 @@
                     </div>
                     <div class="name">
                         <h3 class="title">{{ $user->name }}</h3>
+                        <p>{{ $rol->name }}</p>
                     </div>
-                    <div class="description text-center">
-                        <p>{{ $user->user_rol->name }}</p>
-                    </div>
+                   
                     @if (session('notification'))
                         <div class="alert alert-success">
                             {{ session('notification') }}
@@ -29,8 +28,7 @@
                 <div class="section landing-section">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h2 class="text-center title">Work with us</h2>
-                            <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
+                            <h2 class="text-center title">Datos de cuenta</h2>
                             <form class="contact-form">
                                 <div class="row">
                                     <div class="col-md-6">

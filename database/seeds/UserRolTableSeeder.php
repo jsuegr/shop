@@ -13,18 +13,18 @@ class UserRolTableSeeder extends Seeder
     {
         //
         UserRol::create([
-            'name' => 'client',
+            'name' => 'Cliente',
             'description' => 'Rol dedicado para clientes del sistema. Solo permite hacer compras y manegar su cuenta'
         ]);
 
 
         UserRol::create([
-            'name' => 'provider',
+            'name' => 'Proveedor',
             'description' => 'Rol dedicado para proveedores del sistema. Tiene acceso al módulo de ventas y de compras'
         ]);
         
         UserRol::create([
-        	'name' => 'admin',
+        	'name' => 'Administrador',
         	'description' => 'Rol para administrador de página. Tiene acceso total al sistema'
         ]);
 

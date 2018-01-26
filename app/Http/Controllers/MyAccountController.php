@@ -19,10 +19,11 @@ class MyAccountController extends Controller
     public function edit()
     {
         $roles = UserRol::orderBy('name')->get();
-        $user = User::find(auth()->user()->id);
+        $user_id = auth()->user()->id;
+        $user = User::find(1);
+        $rol = UserRol::find($user->userrol_id);
         $photo = '/images/users/'.$user->photo;
-        dd($user->rol()->id);
-        return view('admin.users.show')->with(compact('user', 'roles', 'photo')); // form de edición
+        return view('admin.users.show')->with(compact('user', 'roles', 'photo', 'rol')); // form de edición
     }
 
     public function update(Request $request)

@@ -7,7 +7,7 @@ use App\User;
 class UserRol extends Model
 {
     //
-    public function user()
+    public function users()
     {
     	return $this->hasMany(User::class);
     } 

@@ -32,7 +32,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->string('address')->nullable();
             $table->string('username'); // login
             $table->string('photo')->nullable(); 
             $table->integer('status')->default(1); // habilitado-deshabilitado
@@ -40,6 +39,9 @@ class CreateUsersTable extends Migration
             //FK
             $table->integer('userrol_id')->unsigned()->index()->nullable();
             $table->foreign('userrol_id')->references('id')->on('user_rols');
+
+            
+            
             $table->rememberToken();
             $table->timestamps();
         });

@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use App\User;
-
+use App\Address;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -19,11 +19,9 @@ class UsersTableSeeder extends Seeder
             'email' => 'jsuegr@gmail.com',
             'password' => bcrypt('123123'),
             'phone' => '5568625718',
-            'address' => 'direccion 1',
             'username' => 'jsuegr',
             'userrol_id' => '3',
-            'photo' => 'user3.jpg'
-
+            'photo' => 'user3.jpg',
         ]);
 
         User::create([
@@ -31,10 +29,9 @@ class UsersTableSeeder extends Seeder
             'email' => 'angelica.m@gmail.com',
             'password' => bcrypt('123123'),
             'phone' => '5568979121',
-            'address' => 'direccion 2',
             'username' => 'angelica.m',
             'userrol_id' => '2',
-            'photo' => 'user2.jpg'
+            'photo' => 'user2.jpg',
         ]);
 
         User::create([
@@ -42,10 +39,17 @@ class UsersTableSeeder extends Seeder
             'email' => 'raul.d@gmail.com',
             'password' => bcrypt('123123'),
             'phone' => '5578891345',
-            'address' => 'direccion 3',
             'username' => 'raul.d',
             'userrol_id' => '1',
-            'photo' => 'user1.jpg'
+            'photo' => 'user1.jpg',
         ]);
+
+        $users = factory(User::class, 13)->create()
+        ->each(function ($user) {
+            $addresses = factory(Address::class, 2)->make();
+            $user->addresses()->saveMany($addresses);
+        });
+
+
     }
 }
