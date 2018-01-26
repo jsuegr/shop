@@ -20,27 +20,41 @@ class MyAccountController extends Controller
     {
         $roles = UserRol::orderBy('name')->get();
         $user_id = auth()->user()->id;
-        $user = User::find(1);
+        $user = User::find($user_id);
         $rol = UserRol::find($user->userrol_id);
-        $photo = '/images/users/'.$user->photo;
-        return view('admin.users.show')->with(compact('user', 'roles', 'photo', 'rol')); // form de edición
+        //$photo = '/images/users/'.$user->photo;
+        return view('admin.users.show')->with(compact('user', 'roles', 'rol')); // form de edición
     }
 
     public function update(Request $request)
     {
-        $this->validate($request);
+        //$this->validate($request);
         // dd($request->all());
         $user = User::find(auth()->user()->id);
+        $rol = UserRol::find($user->userrol_id);
         $user->name = $request->input('name');
-        $user->last_name = $request->input('last_name');
+        //$user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->phone = $request->input('phone');
-        $user->address = $request->input('address');
+        //$user->address = $request->input('address');
         $user->username = $request->input('username');
-        $user->userrol_id = $request->userrol_id;
+        
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $path = public_path() . '/images/users';
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+            
+            $user->photo = $fileName;
+            
+        }        
+
+
         $user->save(); // UPDATE
-        return redirect('/myaccount/edit');
+        //dd($rol->name);
+        return view('admin.users.show')->with(compact('user','rol'));
     }
 
     public function destroy()

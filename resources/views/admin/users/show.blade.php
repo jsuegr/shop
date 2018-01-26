@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="profile">
                     <div class="avatar">
-                        <img src="{{ $photo }}" alt="Circle Image" class="img-circle image-cropper img-responsive img-raised">
+                        <img src="{{ $user->profilePhoto }}" alt="Circle Image" class="img-circle image-cropper img-responsive img-raised">
                     </div>
                     <div class="name">
                         <h3 class="title">{{ $user->name }}</h3>
@@ -29,31 +29,57 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2 class="text-center title">Datos de cuenta</h2>
-                            <form class="contact-form">
+                            <div class="text-center">
+                                <a style="margin-right: 10px;" href="#">Cambiar contraseña</a> | <a style="margin-left: 10px;" href="#">Cambiar Foto</a>
+                            </div>
+                                
+                            <form class="contact-form" method="POST" action="{{ url('/myaccount/edit') }}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Your Name</label>
-                                            <input type="email" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Your Email</label>
-                                            <input type="email" class="form-control">
+                                    <div class="col-md-12">
+                                        <div class="">
+                                            <label class="control-label">Cambiar foto</label>
+                                            <input type="file" name="photo">
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="form-group label-floating">
-                                    <label class="control-label">Your Messge</label>
-                                    <textarea class="form-control" rows="4"></textarea>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Nombre</label>
+                                            <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" >
+                                        </div>
+                                    </div>
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Correo Electrónico</label>
+                                            <input type="email" name="email" class="form-control"  value="{{ old('email', $user->email) }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Phone</label>
+                                            <input type="text" name="phone" class="form-control" value="{{ old('phone', $user->phone) }}" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Usuario</label>
+                                            <input type="text" name="username" class="form-control"  value="{{ old('username', $user->username) }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="row">
                                     <div class="col-md-4 col-md-offset-4 text-center">
                                         <button class="btn btn-primary btn-raised">
-                                            Send Message
+                                            Guardar Cambios
                                         </button>
                                     </div>
                                 </div>

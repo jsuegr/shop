@@ -63,4 +63,12 @@ class User extends Authenticatable
           //  return true;
         return $user->userrol_id;
     }
+
+    public function getProfilePhotoAttribute(){
+        $photo = $this->photo;
+        if (substr($photo, 0, 4) === "http") {
+            return $photo;
+        }
+        return '/images/users/'.$photo;
+    }
 }
