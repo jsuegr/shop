@@ -41,7 +41,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     @guest
                         <li><a href="{{ route('login') }}">Ingresar</a></li>
-                       
                     @else
                         <li><a href="{{ route('home') }}" > <i class="material-icons">shopping basket</i></a></li>
                         <li class="dropdown">
@@ -91,6 +90,8 @@
         @yield('content')
     </div>
 </body>
+
+     <script src="{{ asset('/js/material.min.js') }}"></script>
 
     <!--   Core JS Files   -->
     <script src="{{ asset('/js/jquery.min.js') }}" type="text/javascript"></script>
