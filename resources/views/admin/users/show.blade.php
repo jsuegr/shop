@@ -96,122 +96,91 @@
                         </a>
                      </div>
                 </div>
-
             </div>
     </div>
 </div>
-
-
 </div>
 
 
 <div class="modal fade" id="modalAddCard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
   <div class="modal-dialog">
-
     <div class="modal-content">
-
       <div class="modal-header">
-
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
         <h4 class="modal-title" id="myModalLabel">Ingrese los datos de su tarjeta de débito o crédito</h4>
-
       </div>
-
-      <form method="post" action="{{ url('/cart') }}" id="payment-form">
-
+      <form action="#" id="payment-form">
         {{ csrf_field() }}
-
             <div class="modal-body">
-
                 <input type="hidden" name="token_id" id="token_id">
-
-                
-
                 <div class="row">
-
                     <div class="col-md-6">
-
                     <div class="form-group label-floating">
-
                         <label>Nombre del titular</label><input type="text" placeholder="Como aparece en la tarjeta" value="Josue Garcia" autocomplete="off" name="name" data-openpay-card="holder_name" class="form-control">
-
                     </div>
-
                     </div>
-
                     <div class="col-md-6">
-
                         <div class="form-group label-floating">
-
                             <label>Número de tarjeta</label>
-
                             <input type="text" autocomplete="off" data-openpay-card="card_number" value="4111111111111111" class="form-control"></div>
-
                     </div>
-
                 </div>
-
                 <div class="row">
-
                     <div class="col-md-3 ">
-
                         <div class="form-group label-floating">
-
                             <label>Mes de expiración</label>
-
                             <input type="text" class="form-control" placeholder="MM" data-openpay-card="expiration_month" value="09">
-
                         </div>
-
                     </div>
-
-                
-
                     <div class="col-md-3 form-group label-floating">
-
                         <label>Año de expiración</label>
-
                         <input type="text" placeholder="YY" data-openpay-card="expiration_year" value="22" class="form-control">
-
                     </div>
-
-                                  
-
                     <div class="col-md-4 form-group label-floating"><label>Código de seguridad</label>
-
                         <div class="sctn-col half l"><input type="text" placeholder="3 dígitos" autocomplete="off" data-openpay-card="cvv2" value="657" class="form-control"></div>
-
                     </div>
-
                 </div>
-
-
-
                     <label class="form-control">Tus pagos se realizan de forma segura con encriptación de 256 bits</label>
-
             </div>
-
-             
-
-    
-
             <div class="modal-footer">
-
             <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cancelar</button>
-
-            <button type="submit" class="btn btn-info btn-simple">Agregar tarjeta</button>
-
+            <button type="button" id="pay-button" class="btn btn-info btn-simple">Agregar tarjeta</button>
           </div>
-
       </form>
-
     </div>  
-
   </div>
-
 </div>   
 
 @include('includes.footer')
+@endsection
+@section('scripts')
+<script>
+     $(document).ready(function() {
+            OpenPay.setId('mzi3n9jplzsfvk30dqlb');
+            OpenPay.setApiKey('pk_991ffb3972c64b91ad85ffe5e6c4a04e');
+            OpenPay.setSandboxMode(true);
+            //Se genera el id de dispositivo
+            var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
+            
+            $('#pay-button').on('click', function(event) {
+                event.preventDefault();
+                $("#pay-button").prop( "disabled", true);
+                OpenPay.token.extractFormAndCreate('payment-form', sucess_callbak, error_callbak);                
+            });
+
+            var sucess_callbak = function(response) {
+              var token_id = response.data.id;
+              $('#token_id').val(token_id);
+              //alert(token_id);
+              $('#payment-form').submit();
+            };
+
+            var error_callbak = function(response) {
+                var desc = response.data.description != undefined ? response.data.description : response.message;
+                alert("ERROR [" + response.status + "] " + desc);
+                $("#pay-button").prop("disabled", false);
+            };
+
+        });
+</script>
 @endsection
