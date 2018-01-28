@@ -23,6 +23,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'photo' => $faker->imageUrl(250, 250),
         'phone' => $faker->phoneNumber(),
-        'username' => $faker->username()
+        'username' => $faker->username(),
+        'userrol_id' => $faker->numberBetween(1,3),
     ];
 });

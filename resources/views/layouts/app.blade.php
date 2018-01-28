@@ -64,12 +64,18 @@
                                 <li class="divider"></li>
                                 @if (auth()->user()->userrol_id==3)
                                 <li>
-                                    <a href="{{ url('/admin/categories') }}">Gestionar categorías</a>
+                                    <a href="{{ url('/admin/categories') }}">Administrar categorías</a>
                                 </li>
                                 @endif
                                 @if (auth()->user()->userrol_id!=1)
                                 <li>
-                                    <a href="{{ url('/admin/products') }}">Gestionar productos</a>
+                                    <a href="{{ url('/admin/products') }}">Administrar productos</a>
+                                </li>
+                                @endif
+                                 @if (auth()->user()->userrol_id==3)
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ url('/admin/users') }}">Administrar usuario</a>
                                 </li>
                                 @endif
                                 <li class="divider"></li>

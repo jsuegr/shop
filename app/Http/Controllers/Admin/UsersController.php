@@ -15,8 +15,8 @@ class UsersController extends Controller
     public function index()
     {
     	$users = User::paginate(10);
-        //return "hola";
-    	return view('admin.users.index')->with(compact('users')); // listado
+        $roles = UserRol::get();
+    	return view('admin.users.index')->with(compact('users','roles')); // listado
     }
 
     public function create()

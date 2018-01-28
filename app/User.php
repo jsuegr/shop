@@ -28,8 +28,9 @@ class User extends Authenticatable
     ];
 
     public function rol()
-    {
-        return $this->belongsTo('App\UserRol','rol_id');    
+    {   
+
+        return $this->belongsTo(UserRol::class, 'userrol_id');
     }
 
     public function addresses(){
@@ -71,4 +72,5 @@ class User extends Authenticatable
         }
         return '/images/users/'.$photo;
     }
+
 }
