@@ -115,7 +115,7 @@ class UsersController extends Controller
 
         $user = User::find($id);
         $user->status=0;
-        $product->save(); // Dar de baja
+        $user->save(); // Dar de baja
 
         return back();
     }
