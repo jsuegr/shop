@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Cart;
 class HomeController extends Controller
 {
 
@@ -15,7 +15,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+    	$user_id = auth()->user()->id;
+    	$carts = Cart::where('user_id',$user_id)->get();
+    	//dd($user_id);
+    	//dd($carts);
+        return view('carrito.home')->with(compact('carts'));
     	//return "home";
     }
 

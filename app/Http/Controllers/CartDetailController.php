@@ -6,11 +6,22 @@ use Illuminate\Http\Request;
 
 use App\CartDetail;
 use App\Product;
+use App\Cart;
 class CartDetailController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function show(Cart $cart)
+    {
+
+        if($cart->user_id==auth()->user()->id)
+            return view('carrito.detalles')->with(compact('cart'));
+        //else
+        $notification="No se ha podido cargar el detalle del carrito";
+        return redirect('/')->with(compact('notification'));
     }
 
     public function store(Request $request)
