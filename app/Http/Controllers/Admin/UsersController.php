@@ -51,7 +51,7 @@ class UsersController extends Controller
         }        
 
 
-        $user->save(); // UPDATE
+        $user->save(); // Store
         //dd($rol->name);
         return redirect('admin/users/create');
     }
@@ -67,21 +67,46 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        
-        $this->validate($request, $rules);
-        
+
+
+        $rules = [
+            'name' => 'required|min:3',
+            'username' => 'required|max:10|min:3',
+            'email' => 'email',
+            'phone' => 'min:8|numeric',
+        ];
+
         $user = User::find($id);
+
+        if($request->input('username')==$user->username){
+            $this->validate($request,$rules,User::$messages);        
+        }else{
+            $this->validate($request,User::$rules,User::$messages);
+        }
+        
+                
+
         $user->name = $request->input('name');
-        $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->phone = $request->input('phone');
-        $user->address = $request->input('address');
         $user->username = $request->input('username');
-        $user->userrol_id = $request->userrol_id;
+        $user->userrol_id = $request->input('userrol_id');
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $path = public_path() . '/images/users';
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+            
+            $user->photo = $fileName;
+            
+        }else{
+            $user->photo = 'default.jpg';
+        }        
         $user->save(); // UPDATE
 
-        return redirect('/admin/users');
+        return redirect("/admin/users/$user->id/edit");
     }
 
     public function destroy($id)
