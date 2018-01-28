@@ -10,7 +10,7 @@
     <div class="container">
 
         <div class="section">
-            <h2 class="title text-center">Registrar nueva categoría</h2>
+            <h2 class="title text-center">Registrar nuevo usuario</h2>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -22,26 +22,65 @@
                 </div>
             @endif
 
-            <form method="post" action="{{ url('/admin/categories') }}" enctype="multipart/form-data">
+            <form class="contact-form" method="POST" action="{{ url('/admin/users') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
-
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group label-floating">
-                            <label class="control-label">Nombre de la categoría</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                    <div class="col-md-12">
+                        <div class="">
+                            <label class="control-label">Foto</label>
+                            <input type="file" name="photo">
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label class="control-label">Imagen de la categoría</label>
-                        <input type="file" name="image">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Nombre</label>
+                            <input type="text" name="name" class="form-control" value="{{ old('name') }}" >
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Usuario</label>
+                            <input type="text" name="username" class="form-control"  value="{{ old('username') }}">
+                        </div>
+                    </div>
+               
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Correo Electrónico</label>
+                            <input type="email" name="email" class="form-control"  value="{{ old('email') }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Phone</label>
+                            <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" >
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <select class="form-control" name="userrol_id">
+                            @foreach($roles as $rol)
+                              <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+  
+                </div>
+                <input type="hidden" name="password" class="form-control" value="secret" >
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 text-center">
+                        <button class="btn btn-primary btn-raised">
+                            Guardar
+                        </button>
                     </div>
                 </div>
 
-                <textarea class="form-control" placeholder="Descripción de la categoría" rows="5" name="description">{{ old('description') }}</textarea>
-
-                <button class="btn btn-primary">Registrar categoría</button>
-                <a href="{{ url('/admin/categories') }}" class="btn btn-default">Cancelar</a>
             </form>
         </div>
 

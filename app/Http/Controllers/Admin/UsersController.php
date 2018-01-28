@@ -21,11 +21,42 @@ class UsersController extends Controller
 
     public function create()
     {
-        $roles = UserRol::orderBy('name')->get();
+        $roles = UserRol::orderBy('id')->get();
     	return view('admin.users.create')->with(compact('roles')); // formulario de registro
     }
 
     
+    public function store(Request $request)
+    {
+        $this->validate($request,User::$rules,User::$messages);
+        $user = new User();
+        
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->phone = $request->input('phone');
+        $user->username = $request->input('username');
+        $user->userrol_id = $request->input('userrol_id');
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $path = public_path() . '/images/users';
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $moved = $file->move($path, $fileName);
+            
+            $user->photo = $fileName;
+            
+        }else{
+            $user->photo = 'default.jpg';
+        }        
+
+
+        $user->save(); // UPDATE
+        //dd($rol->name);
+        return redirect('admin/users/create');
+    }
+
+
     public function edit($id)
     {
         $roles = UserRol::orderBy('name')->get();

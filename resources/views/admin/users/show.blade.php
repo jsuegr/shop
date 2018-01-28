@@ -15,7 +15,7 @@
                     </div>
                     <div class="name">
                         <h3 class="title">{{ $user->name }}</h3>
-                        <p>{{ $rol->name }}</p>
+                        <p>{{ $user->rol->name }}</p>
                     </div>
                    
                     @if (session('notification'))

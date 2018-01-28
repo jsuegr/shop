@@ -9,6 +9,17 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public static $messages = [
+        'name.required' => 'Es necesario ingresar un nombre para el usuario.',
+        'name.min' => 'El nombre debe tener al menos 3 caracteres.',
+    ];
+    public static $rules = [
+        'name' => 'required|min:3',
+        'username' => 'unique:users,username|required|max:10|min:3',
+        'email' => 'email|unique:users,email',
+        'phone' => 'min:8|numeric',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
